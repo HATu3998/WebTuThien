@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
@@ -63,24 +64,46 @@
 
 
     <!-- NAVBAR -->
-    <header class="site-navbar mt-3">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-              <div class="site-logo col-6"><a href="./">Website Quyên Góp</a></div>
+   <header class="site-navbar mt-3">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+    
+      <nav class="site-navigation col-6">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="./">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Về chúng tôi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hoàn cảnh quyên góp</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Đối tác đồng hành</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tin tức cộng đồng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Liên hệ</a>
+          </li>
+          <li> Hi! <security:authentication property="principal.username" /></li>
+          <li>   <div class="logout-form">
+        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+          <input type="submit" value="Logout" />
+        </form:form>
+      </div></li>
+        </ul>
+      </nav>
+    
       
-            </div>
-          </div>
-    </header>
+  </div>
+</header>
+
 
     <!-- HOME -->
 <section class="section-hero overlay inner-page bg-image" id="home-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7">
-                <h1 class="text-white font-weight-bold"><a href="./access-denied">Danh sách các đợt quyên góp</a></h1>
-            </div>
-        </div>
-    </div>
     
     <div class="image-container">
     <img src="https://homepage.momocdn.net/img/momo-upload-api-210208163328-637483988083867007.jpg" loading="lazy" alt="Hình ảnh">
@@ -89,6 +112,7 @@
 
 
     <section class="site-section">
+
         <div class="container">
 
             <div class="row mb-5 justify-content-center">

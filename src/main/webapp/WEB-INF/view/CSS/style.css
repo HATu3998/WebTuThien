@@ -28,14 +28,68 @@ body {
     margin: 0 auto;
     padding: 0 15px;
 }
-
+/* Navbar */
 /* Navbar */
 .site-navbar {
-    background-color: #fff;
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.site-navbar .user-info {
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.site-navbar .logout-form input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.site-navbar .logout-form input[type="submit"]:hover {
+  background-color: #555;
+}
+
+.site-logo a {
+  color: #333;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.site-navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-navigation li {
+  display: inline-block;
+}
+
+.site-navigation li a {
+  color: #333;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.site-navigation li a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.site-navigation .nav {
+  justify-content: flex-end;
+}
+
+
+/*       Navbar      */
 .site-logo a {
     font-size: 24px;
     font-weight: bold;
