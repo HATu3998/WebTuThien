@@ -26,29 +26,32 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// use jdbc authentication ... oh yeah!!!
 		
-		auth.jdbcAuthentication().dataSource(securityDataSource);
+		auth.jdbcAuthentication().dataSource(securityDataSource)
+		
+        ;
 		
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		http.authorizeRequests()
-			.antMatchers("/","/CSS/**","/bootstrap3/**","/assets/**").permitAll()
-			.antMatchers("/leaders/**").hasRole("MANAGER")
-			.antMatchers("/systems/**").hasRole("ADMIN")
-			 
-			.and()
-			.formLogin()
-				.loginPage("/showMyLoginPage")
-				.loginProcessingUrl("/authenticateTheUser")
-				.permitAll()
-			.and()
-			.logout().permitAll()
-			.and()
-			.exceptionHandling().accessDeniedPage("/access-denied");
-		
+	    http.authorizeRequests()
+	      //  .antMatchers("/", "/CSS/**").permitAll()
+	   //     .antMatchers("/leaders/**").hasRole("MANAGER")
+	   //     .antMatchers("/systems/**").hasRole("ADMIN")
+	        .anyRequest().authenticated()
+	        .and()
+	        .formLogin()
+	            .loginPage("/showMyLoginPage")
+	            .loginProcessingUrl("/authenticateTheUser")
+	            .permitAll()
+	        .and()
+	        .logout()
+	            .permitAll()
+	        .and()
+	        .exceptionHandling()
+	            .accessDeniedPage("/access-denied");
 	}
+
 		
 }
 

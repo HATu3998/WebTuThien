@@ -77,7 +77,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h1 class="text-white font-weight-bold">Danh sách các đợt quyên góp</h1>
+                <h1 class="text-white font-weight-bold"><a href="./access-denied">Danh sách các đợt quyên góp</a></h1>
             </div>
         </div>
     </div>
