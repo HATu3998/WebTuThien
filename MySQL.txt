@@ -6,7 +6,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`username`)
 );
 
-INSERT INTO `users` VALUES ('Atus','{noop}123456',1), ('mary','{noop}test123',1), ('susan','{noop}test123',1);
+INSERT INTO `users` VALUES ('Atus','{noop}123456',1), ('mary','{noop}test123',0), ('susan','{noop}test123',1);
 
 
 
@@ -29,14 +29,14 @@ CREATE TABLE info (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     hoTen VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     email VARCHAR(255),
-    sdt INT(10),
+    sdt VARCHAR(255),
     username VARCHAR(50),
     CONSTRAINT `info_fk_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
 );
 
-INSERT INTO info (hoTen, email, sdt, username) VALUES ('Hùynh Anh Tú', 'john@example.com', 1234567890, 'Atus');
-INSERT INTO info (hoTen, email, sdt, username) VALUES ('Mary Smith', 'mary@example.com', 9876543210, 'mary');
-INSERT INTO info (hoTen, email, sdt, username) VALUES ('Susan Johnson', 'susan@example.com', 5555555555, 'susan');
+INSERT INTO info (hoTen, email, sdt, username) VALUES ('Hùynh Anh Tú', 'john@example.com', '1234567890', 'Atus');
+INSERT INTO info (hoTen, email, sdt, username) VALUES ('Mary Smith', 'mary@example.com', '9876543210', 'mary');
+INSERT INTO info (hoTen, email, sdt, username) VALUES ('Susan Johnson', 'susan@example.com', '5555555555', 'susan');
 
 
 
@@ -50,10 +50,9 @@ CREATE TABLE tuThien (
     toChuc VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     sdt INT(10),
     tongTien INT,
-    trangThai INT(4),
-   info_id INT,
- CONSTRAINT fk_info_tuThien FOREIGN KEY (info_id) REFERENCES info(id)
-);
+    trangThai INT(4))
+  
+;
 
 CREATE TABLE userQuyenGop (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -61,8 +60,10 @@ CREATE TABLE userQuyenGop (
     noiDung VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     tien INT,
     tuThien_id INT,
-    User_id INT,
-    CONSTRAINT fk_userQuyenGop_tuThien FOREIGN KEY (tuThien_id) REFERENCES tuThien(id)
+   info_id INT,
+    CONSTRAINT fk_userQuyenGop_tuThien FOREIGN KEY (tuThien_id) REFERENCES tuThien(id),
+
+ CONSTRAINT fk_info_userQuyenGop FOREIGN KEY (info_id) REFERENCES info(id)
    
 );
 

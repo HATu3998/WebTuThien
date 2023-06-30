@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="com.luv2code.springsecurity.entity.*" %>
+<%@ page import="java.util.List" %>
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
@@ -27,6 +29,7 @@
 <style>
     <%@ include file="./CSS/style.css" %>
 </style>
+
 <div id="overlayer"></div>
 <div class="loader">
     <div class="spinner-border text-primary" role="status">
@@ -49,8 +52,19 @@
         //     type: 'success'
         // })
     </script>
+    
+    
 </div>
-
+<script>
+    $(document).ready(function() {
+        $('.btn.btn-primary.py-2').click(function() {
+            var name = $(this).closest('.job-listing').find('h2').text();
+            var idDonation = $(this).closest('.job-listing').data('iddonation');
+            $('#myModal .modal-title span').text(name);
+            $('#myModal input[name="idDonation"]').val(idDonation);
+        });
+    });
+</script>
 <div class="site-wrap">
 
     <div class="site-mobile-menu site-navbar-target">
@@ -94,6 +108,18 @@
           <input type="submit" value="Logout" />
         </form:form>
       </div></li>
+      <li>
+     <security:authorize access="hasRole('ADMIN')">  
+
+		<!-- Add a link to point to /systems ... this is for the admins -->
+		
+		<p>
+			<a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
+			
+		</p>
+	
+	</security:authorize>
+      </li>
         </ul>
       </nav>
     
@@ -120,26 +146,30 @@
                     <h2 class="section-title mb-2" >Các đợt quyên góp</h2>
                 </div>
             </div>
-
+  <% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
             <ul class="job-listings mb-5">
                 <th>
                     <li style="margin-bottom: 20px" class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center ">
                         <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                             <div class="job-listing-position custom-width  mb-3 mb-sm-0" style="padding: 10px;width: 250px">
-                                <h2>Quyên góp mùa lũ</h2>
-                                <strong > Mới tạo </strong>
+                                <h2><%=tu.getTen() %></h2>
+                                <strong ><%=tu.getTrangThai() %> </strong>
                             </div>
                             <div class="job-listing-location mb-3 mb-sm-0 custom-width w-10" style="padding: 10px;">
                                 Ngày bắt đầu<br>
-                                <strong th:text="${category.startDate}"></strong><br>
+                                <strong ><%=tu.getNgayBatDau() %></strong><br>
                             </div>
                             <div class="job-listing-location mb-3 mb-sm-0 custom-width w-10" style="padding: 10px;">
                                 Ngày kết thúc<br>
-                                <strong th:text="${category.endDate}"></strong><br>
+                                  <strong ><%=tu.getNgayKetThuc()%></strong><br>
+                              
                             </div>
                             <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25" style="padding: 10px;">
-                                <span class="icon-room"></span> <span th:text="${category.organizationName}"></span><br>
-                                <strong th:text="${category.phoneNumber}"></strong><br>
+                                <span class="icon-room"></span>
+                                
+                                 <span >Tên tổ cức<%=tu.getToChuc() %></span><br>
+                                  <p >SDT:<%=tu.getSdt() %></p><br>
+                         
                             </div>
                             <div class="job-listing-meta custom-width w-20" >
                                 <p style="margin-top: 20px" class="btn btn-primary py-2" data-toggle="modal">Quyên góp</p>
@@ -149,7 +179,7 @@
 
                     </li>
                     <!-- Modal -->
-                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div id="myModal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -196,15 +226,13 @@
                         </div>
                     </div>
                 </th>
-                <script>
-                    function detail(id){
-                        window.location = '/donation/detail/' + id;
-                    }
-
-
-                </script>
+            
             </ul>
 
+
+   <% } %>
+        
+    
             <div class="row pagination-wrap">
                 <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
 

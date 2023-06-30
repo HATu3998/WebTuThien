@@ -1,6 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-
+<%@ page import="com.luv2code.springsecurity.entity.*" %>
+<%@ page import="java.util.List" %>
 <html>
 
 <head>
@@ -10,6 +13,24 @@
 <body>
 	<h2>luv2code Company Home Page</h2>
 	<hr>
+<% 
+    List<TuThien> tuList = (List<TuThien>) request.getAttribute("tuList");
+    if (tuList != null) {
+        for (TuThien tu : tuList) {
+%>
+            <li>
+                <h2><%= tu.getTen() %></h2>
+                <p>Ngày bắt đầu: <%= tu.getNgayBatDau() %></p>
+                <p>Ngày kết thúc: <%= tu.getNgayKetThuc() %></p>
+                <p>Tổ chức: <%= tu.getToChuc() %></p>
+                <p>Số điện thoại: <%= tu.getSdt() %></p>
+                <p>Trạng thái: <%= tu.getTrangThai() %></p>
+            </li>
+<% 
+        }
+    }
+%>
+
 	
 	<p>
 	Welcome to the luv2code company home page!
