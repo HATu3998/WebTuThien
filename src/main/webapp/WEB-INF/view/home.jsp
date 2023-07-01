@@ -80,6 +80,61 @@
 	
 	</form:form>
 	
+	
+	
+	
+	
+	
+	
+	  <!-- NAVBAR -->
+   <header class="site-navbar mt-3">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+    
+      <nav class="site-navigation col-6">
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="./">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Về chúng tôi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hoàn cảnh quyên góp</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Đối tác đồng hành</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tin tức cộng đồng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Liên hệ</a>
+          </li>
+          <li> Hi! <security:authentication property="principal.username" /></li>
+          <li>   <div class="logout-form">
+        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+          <input type="submit" value="Logout" />
+        </form:form>
+      </div></li>
+      <li>
+     <security:authorize access="hasRole('ADMIN')">  
+
+		<!-- Add a link to point to /systems ... this is for the admins -->
+		
+		<p>
+			<a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
+			
+		</p>
+	
+	</security:authorize>
+      </li>
+        </ul>
+      </nav>
+    
+      
+  </div>
+</header>
 </body>
 
 </html>

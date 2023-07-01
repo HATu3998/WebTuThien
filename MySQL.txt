@@ -48,8 +48,8 @@ CREATE TABLE tuThien (
     ngayBatDau DATE,
     ngayKetThuc DATE,
     toChuc VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    sdt INT(10),
-    tongTien INT,
+    sdt VARCHAR(255),
+    tongTien VARCHAR(255),
     trangThai INT(4))
   
 ;

@@ -44,7 +44,7 @@ public class TuThienServlet extends HttpServlet {
 	 	        List<TuThien> tuList = query.list();
 
 	 	        request.setAttribute("tuList", tuList);
-	 	        request.getRequestDispatcher("/").forward(request, response);
+	 	        request.getRequestDispatcher("/file").forward(request, response);
 	 	    } catch (Exception e) {
 	 	        e.printStackTrace();
 	 	        System.out.print("lỗi");

@@ -32,11 +32,11 @@ public class TuThien {
     @Column(name = "toChuc", length = 255)
     private String toChuc;
 
-    @Column(name = "sdt")
-    private Integer sdt;
+    @Column(name = "sdt", length = 255)
+    private String sdt;
 
-    @Column(name = "tongTien")
-    private Integer tongTien;
+    @Column(name = "tongTien", length = 255)
+    private String tongTien;
 
     @Column(name = "trangThai")
     private Integer trangThai;
@@ -85,19 +85,19 @@ public class TuThien {
 		this.toChuc = toChuc;
 	}
 
-	public Integer getSdt() {
+	public String getSdt() {
 		return sdt;
 	}
 
-	public void setSdt(Integer sdt) {
+	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
 
-	public Integer getTongTien() {
+	public String getTongTien() {
 		return tongTien;
 	}
 
-	public void setTongTien(Integer tongTien) {
+	public void setTongTien(String tongTien) {
 		this.tongTien = tongTien;
 	}
 

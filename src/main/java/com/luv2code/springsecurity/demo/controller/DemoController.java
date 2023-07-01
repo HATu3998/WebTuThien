@@ -11,7 +11,12 @@ public class DemoController {
 		
 		return "index";
 	}
-	
+	@GetMapping("/file")
+	public String showFile() {
+		
+		return "file";
+	}
+ 
 	// add request mapping for /leaders
 
 	@GetMapping("/leaders")
