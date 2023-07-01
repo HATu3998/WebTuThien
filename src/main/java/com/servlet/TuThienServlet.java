@@ -14,41 +14,50 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import com.hibernate.utils.HibernateUtil;
+import com.DAO.PaginationUtils;
 
-/**
- * Servlet implementation class TuThienServlet
- */
 @WebServlet("/TuThienServlet")
 public class TuThienServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private SessionFactory sessionFactory;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-	@Override
+    private static final long serialVersionUID = 1L;
+    private SessionFactory sessionFactory;
+
+    @Override
     public void init() throws ServletException {
         sessionFactory = HibernateUtil.getSessionFactory();
     }
-    public TuThienServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+
+ 
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int page = 1;
+        int pageSize = 3;
+        
+        // Read the page parameter from the request if it exists
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            page = Integer.parseInt(pageParam);
+        }
+
+        try (Session session = sessionFactory.openSession()) {
+            Query<TuThien> query = session.createQuery("FROM TuThien", TuThien.class);
+            List<TuThien> tuList = query.list();
+
+            int totalItems = tuList.size();
+            int totalPages = PaginationUtils.calculateTotalPages(totalItems, pageSize);
+            
+            // Paginate the data based on the page and pageSize
+            List<TuThien> paginatedList = PaginationUtils.paginate(tuList, page, pageSize);
+
+            request.setAttribute("tuList", paginatedList);
+            request.setAttribute("totalPages", totalPages);
+            request.setAttribute("currentPage", page);
+            request.getRequestDispatcher("/file").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.print("lỗi");
+        }
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		 try (Session session = sessionFactory.openSession()) {
-	 	        Query<TuThien> query = session.createQuery("FROM TuThien", TuThien.class);
-	 	        List<TuThien> tuList = query.list();
-
-	 	        request.setAttribute("tuList", tuList);
-	 	        request.getRequestDispatcher("/file").forward(request, response);
-	 	    } catch (Exception e) {
-	 	        e.printStackTrace();
-	 	        System.out.print("lỗi");
-	 	    }	}
 	 @Override
 	 public void destroy() {
 	     sessionFactory.close();

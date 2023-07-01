@@ -25,17 +25,7 @@
         <%@ include file="./CSS/style.css" %>
     </style>
 
-    <script>
-        $(document).ready(function() {
-            $('.btn.btn-primary.py-2').click(function() {
-                var name = $(this).closest('.job-listing').find('h2').text();
-                var idDonation = $(this).closest('.job-listing').data('iddonation');
-                $('#myModal .modal-title span').text(name);
-                $('#myModal input[name="idDonation"]').val(idDonation);
-                $('#myModal').modal('show');
-            });
-        });
-    </script>
+ 
 </head>
 
 <body id="top">
@@ -137,59 +127,75 @@
                             <p>SDT:<%=tu.getSdt() %></p><br>
                         </div>
                         <div class="job-listing-meta custom-width w-20">
-                            <p style="margin-top: 20px" class="btn btn-primary py-2" data-toggle="modal" data-target="#myModal" data-name="<%=tu.getTen()%>" data-idDonation="<%=tu.getId()%>">Quyên góp</p>
-                        </div>
+                        <button id="btnQuyenGop">Quyên góp</button>
                     </div>
                 </li>
             </ul>
+           
+           <div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="btnClose">&times;</span>
+    <h2>Nhập thông tin quyên góp</h2>
+    <form>
+      <!-- Các trường thông tin quyên góp ở đây -->
+      <input type="text" name="ten" placeholder="Tên của bạn">
+      <input type="text" name="sotien" placeholder="Số tiền quyên góp">
+      <button type="submit">Gửi quyên góp</button>
+    </form>
+  </div>
+</div>
             <% } %>
 
             <div class="row pagination-wrap">
                 <div class="col-md-6 text-center text-md-left mb-4 mb-md-0"></div>
                 <div class="col-md-6 text-center text-md-right">
-                    <div class="custom-pagination ml-auto">
-                        <a class="prev">Prev</a>
-                        <div class="d-inline-block"></div>
-                        <a class="next">Next</a>
-                    </div>
+                  <%-- Hiển thị các nút trang --%>
+<% int totalPages = (int) request.getAttribute("totalPages"); %>
+<% int currentPage = (int) request.getAttribute("currentPage"); %>
+
+<div class="pagination">
+  <p>  <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>"> Prev </a>
+    <% } %> </p>
+
+    <p>   <% for (int i = 1; i <= totalPages; i++) { %>
+        <%-- Hiển thị các nút trang --%>
+        <a href="?page=<%= i %>"><%= i %></a>
+    <% } %> </p>
+
+<p>    <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>"> Next </a>
+    <% } %> </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Quyên góp: <span id="donationName"></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="post">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <label for="addname" class="col-form-label">Họ tên:</label>
-                                <input type="text" class="form-control" id="addname" name="name" placeholder="" required>
-                                <label for="addname" class="col-form-label">Số tiền quyên góp:</label>
-                                <input type="number" class="form-control" placeholder="" id="addname" name="money" required>
-                                <input type="hidden" class="form-control" placeholder="" id="addname" name="idUser">
-                                <input type="hidden" class="form-control" placeholder="" id="addname" name="idDonation" required>
-                                <label for="addname" class="col-form-label">Lời nhắn:</label>
-                                <textarea rows="10" cols="3" class="form-control" name="text"></textarea>
-                               
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="submit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">Quyên góp</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+ 
+<script>
+    $(document).ready(function() {
+        const modal = document.getElementById("modal");
+        const btnQuyenGop = document.getElementById("btnQuyenGop");
+        const btnClose = document.getElementById("btnClose");
+
+        // Khi nhấp vào nút "Quyên góp", hiển thị modal
+        btnQuyenGop.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Khi nhấp vào nút đóng, ẩn modal
+        btnClose.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Khi nhấp vào bất kỳ vị trí nào ngoài modal, ẩn modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
