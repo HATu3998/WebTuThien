@@ -35,21 +35,19 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	    http.authorizeRequests()
-	      //  .antMatchers("/", "/CSS/**").permitAll()
-	   //     .antMatchers("/leaders/**").hasRole("MANAGER")
-	   //     .antMatchers("/systems/**").hasRole("ADMIN")
-	        .anyRequest().authenticated()
-	        .and()
-	        .formLogin()
-	            .loginPage("/showMyLoginPage")
-	            .loginProcessingUrl("/authenticateTheUser")
-	            .permitAll()
-	        .and()
-	        .logout()
-	            .permitAll()
-	        .and()
-	        .exceptionHandling()
-	            .accessDeniedPage("/access-denied");
+	    .antMatchers("/","/index","/TuThienServlet", "/CSS/style", "/file").permitAll() // Cho phép truy cập công khai cho các trang/index, CSS/style, file
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+            .loginPage("/showMyLoginPage")
+            .loginProcessingUrl("/authenticateTheUser")
+            .permitAll()
+        .and()
+        .logout()
+            .permitAll()
+        .and()
+        .exceptionHandling()
+            .accessDeniedPage("/access-denied");
 	}
 
 		
