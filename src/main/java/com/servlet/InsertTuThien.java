@@ -67,6 +67,7 @@ public class InsertTuThien extends HttpServlet {
 	        tuThien.setNgayKetThuc(LocalDate.now().plusDays(ngayKetThuc));
 	        tuThien.setToChuc(toChuc);
 	        tuThien.setSdt(sdt);
+	        tuThien.setTien("0");
 	        tuThien.setTongTien(tongTien);
 	        tuThien.setTrangThai(1);
 

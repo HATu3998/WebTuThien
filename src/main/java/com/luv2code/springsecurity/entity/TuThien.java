@@ -34,7 +34,8 @@ public class TuThien {
 
     @Column(name = "sdt", length = 255)
     private String sdt;
-
+    @Column(name = "tien", length = 255)
+    private String tien;
     @Column(name = "tongTien", length = 255)
     private String tongTien;
 
@@ -100,6 +101,18 @@ public class TuThien {
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
+
+	public String getTien() {
+		return tien;
+	}
+
+
+
+	public void setTien(String tien) {
+		this.tien = tien;
+	}
+
+
 
 	public String getTongTien() {
 		return tongTien;

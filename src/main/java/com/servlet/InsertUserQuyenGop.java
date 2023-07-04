@@ -49,10 +49,10 @@ public class InsertUserQuyenGop extends HttpServlet {
         	String autho_username = request.getParameter("autho_username");
             String tuThien_id = request.getParameter("tuThien_id");
             String noiDung = request.getParameter("noiDung");
-            String tien = request.getParameter("tien");
+            String tienValue = request.getParameter("tien");
 
             // Chuyển đổi tien thành Integer
-            Integer tienInteger = Integer.parseInt(tien);
+            Integer tienInteger = Integer.parseInt(tienValue);
 
             // Tạo đối tượng UserQuyenGop và gán giá trị
             UserQuyenGop userQuyenGop = new UserQuyenGop();
@@ -64,25 +64,27 @@ public class InsertUserQuyenGop extends HttpServlet {
             TuThien tuThien = session.get(TuThien.class, Long.parseLong(tuThien_id));
             userQuyenGop.setTuThien(tuThien);
 
+            Integer newTienValue = Integer.parseInt(tuThien.getTien()) + tienInteger;
+            tuThien.setTien(newTienValue.toString());
+            session.update(tuThien);
+     
             
             // Lấy đối tượng User từ cơ sở dữ liệu dựa trên username
             Query<User> userQuery = session.createQuery("FROM User WHERE username=:username", User.class);
             userQuery.setParameter("username", autho_username);
             User user = userQuery.uniqueResult();
             // Lấy đối tượng Authority từ cơ sở dữ liệu dựa trên username
-           
-        
-           
-            userQuyenGop.setUsername(user);
+             userQuyenGop.setUsername(user);
 
             // Lưu đối tượng UserQuyenGop vào cơ sở dữ liệu
+            
             session.save(userQuyenGop);
             tx.commit();
             System.out.println("Thêm dữ liệu thành công!");
 
             // Lấy danh sách TuThien từ cơ sở dữ liệu
-            Query<TuThien> query = session.createQuery("FROM TuThien", TuThien.class);
-            List<TuThien> tuList = query.list();
+            Query<TuThien> queryT = session.createQuery("FROM TuThien", TuThien.class);
+            List<TuThien> tuList = queryT.list();
 
             // Đặt thuộc tính "tuList" vào request và chuyển hướng về trang chủ
             request.setAttribute("tuList", tuList);

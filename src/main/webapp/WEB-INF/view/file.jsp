@@ -158,6 +158,10 @@
 									SDT:<%=tu.getSdt() %></p>
 								<br>
 							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
+							</div>
 							<div class="job-listing-meta custom-width w-20">
 							<c:set var="user" value="${pageContext.request.userPrincipal}" />
 							<c:if test="${not empty user}">
