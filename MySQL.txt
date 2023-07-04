@@ -20,9 +20,7 @@ CREATE TABLE `authorities` (
 
 INSERT INTO `authorities` VALUES
 ('Atus','ROLE_EMPLOYEE'),
-('mary','ROLE_EMPLOYEE'),
 ('mary','ROLE_MANAGER'),
-('susan','ROLE_EMPLOYEE'),
 ('susan','ROLE_ADMIN');
 
 CREATE TABLE info (
@@ -60,10 +58,10 @@ CREATE TABLE userQuyenGop (
     noiDung VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
     tien INT,
     tuThien_id INT,
-   info_id INT,
+   username varchar(50),
     CONSTRAINT fk_userQuyenGop_tuThien FOREIGN KEY (tuThien_id) REFERENCES tuThien(id),
 
- CONSTRAINT fk_info_userQuyenGop FOREIGN KEY (info_id) REFERENCES info(id)
+ CONSTRAINT fk_User_userQuyenGop FOREIGN KEY (username) REFERENCES users(username)
    
 );
 

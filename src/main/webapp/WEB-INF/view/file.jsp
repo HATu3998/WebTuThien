@@ -127,6 +127,7 @@
 					</div>
 				</div>
 
+							
 				<% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
 				<ul class="job-listings mb-5">
 					<li style="margin-bottom: 20px"
@@ -158,7 +159,12 @@
 								<br>
 							</div>
 							<div class="job-listing-meta custom-width w-20">
-								<button id="btnQuyenGop">Quyên góp</button>
+							<c:set var="user" value="${pageContext.request.userPrincipal}" />
+							<c:if test="${not empty user}">
+   <c:set var="userId" value="${user.name}" />
+   
+							<button id="btnQuyenGop"><a href="./donate?tuthienId=<%=tu.getId() %>&&infoId=${userId}">Quyên góp</a></button>
+									</c:if>		
 							</div>
 					</li>
 				</ul>

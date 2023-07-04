@@ -42,13 +42,15 @@ public class TuThienServlet extends HttpServlet {
         try (Session session = sessionFactory.openSession()) {
             Query<TuThien> query = session.createQuery("FROM TuThien", TuThien.class);
             List<TuThien> tuList = query.list();
+            Query<Info> queryInfo = session.createQuery("FROM Info", Info.class);
+            List<Info> InfoList = queryInfo.list();
 
             int totalItems = tuList.size();
             int totalPages = PaginationUtils.calculateTotalPages(totalItems, pageSize);
             
             // Paginate the data based on the page and pageSize
             List<TuThien> paginatedList = PaginationUtils.paginate(tuList, page, pageSize);
-
+            request.setAttribute("InfoList", InfoList);
             request.setAttribute("tuList", paginatedList);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("currentPage", page);

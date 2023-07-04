@@ -40,7 +40,7 @@
 		<input type="submit" value="Login" />
 		
 	</form:form>
-
+<a href="${pageContext.request.contextPath}/">Back to Home Page</a>
 </body>
 
 </html>

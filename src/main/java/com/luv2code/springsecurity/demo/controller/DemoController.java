@@ -49,6 +49,13 @@ public class DemoController {
 		return "access-denied";
 		
 	}
+	
+	@GetMapping("/donate")
+	public String donate() {
+		
+		return "donate";
+		
+	}
 }
 
 

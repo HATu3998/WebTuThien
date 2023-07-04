@@ -34,9 +34,12 @@ public class UserQuyenGop {
 	    private TuThien tuThien;
 
 	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "info_id")
-	    private Info info;
-	public UserQuyenGop() {
+	    @JoinColumn(name = "username")
+	    private User username;
+	
+	    
+	    
+	    public UserQuyenGop() {
 		super();
 	}
 
@@ -80,13 +83,15 @@ public class UserQuyenGop {
 		this.tuThien = tuThien;
 	}
 
-	public Info getInfo() {
-		return info;
+	public User getUsername() {
+		return username;
 	}
 
-	public void setInfo(Info info) {
-		this.info = info;
+	public void setUsername(User username) {
+		this.username = username;
 	}
+
+
 
 
     // Getters and setters

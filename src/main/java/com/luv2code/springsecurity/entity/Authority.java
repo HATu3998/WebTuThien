@@ -53,6 +53,7 @@ public class Authority {
 		this.authority = authority;
 	}
 
+
     // Getters and setters
     // ...
     
