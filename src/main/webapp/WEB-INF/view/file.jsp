@@ -95,7 +95,7 @@
 			</div>
 			</li>
 			<li><security:authorize access="hasRole('ADMIN')">
-					<a href="${pageContext.request.contextPath}/systems"
+					<a href="${pageContext.request.contextPath}/AdminServlet"
 						class="nav-link">IT Systems Meeting</a>
 				</security:authorize></li>
 			</ul>
@@ -140,6 +140,15 @@
 								<strong> <c:if test="<%=tu.getTrangThai() == 1%>">
 										<c:out value="Mới khởi tạo" />
 									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 2%>">
+										<c:out value="Đang quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 3%>">
+										<c:out value="Kết thúc đợt quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 4%>">
+										<c:out value="Đóng quyên góp" />
+									</c:if>
 
 								</strong>
 							</div>
@@ -153,9 +162,9 @@
 							</div>
 							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-25"
 								style="padding: 10px;">
-								<span class="icon-room"></span> <span>Tên tổ chức: <%=tu.getToChuc() %></span><br>
+								<span class="icon-room"></span> <span>Tên tổ chức: <strong><%=tu.getToChuc() %></strong></span><br>
 								<p>
-									SDT:<%=tu.getSdt() %></p>
+									SDT: <strong><%=tu.getSdt() %></strong></p> 
 								<br>
 							</div>
 							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
@@ -163,12 +172,43 @@
 								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
 							</div>
 							<div class="job-listing-meta custom-width w-20">
-							<c:set var="user" value="${pageContext.request.userPrincipal}" />
+							<c:if test="<%=tu.getTrangThai() == 4%>">
+									<c:set var="user" value="${pageContext.request.userPrincipal}" />
+							<c:if test="${not empty user}">
+   <c:set var="userId" value="${user.name}" />
+   
+							<button id="btnQuyenGop" ><a href="#">Đóng Quyên góp</a></button>
+									</c:if>		
+									</c:if>
+									
+									
+									<c:if test="<%=tu.getTrangThai() == 1%>">
+									<c:set var="user" value="${pageContext.request.userPrincipal}" />
 							<c:if test="${not empty user}">
    <c:set var="userId" value="${user.name}" />
    
 							<button id="btnQuyenGop"><a href="./donate?tuthienId=<%=tu.getId() %>&&infoId=${userId}">Quyên góp</a></button>
 									</c:if>		
+									</c:if>
+									
+										<c:if test="<%=tu.getTrangThai() == 2%>">
+									<c:set var="user" value="${pageContext.request.userPrincipal}" />
+							<c:if test="${not empty user}">
+   <c:set var="userId" value="${user.name}" />
+   
+							<button id="btnQuyenGop"><a href="./donate?tuthienId=<%=tu.getId() %>&&infoId=${userId}">Quyên góp</a></button>
+									</c:if>		
+									</c:if>
+									
+										<c:if test="<%=tu.getTrangThai() == 3%>">
+									<c:set var="user" value="${pageContext.request.userPrincipal}" />
+							<c:if test="${not empty user}">
+   <c:set var="userId" value="${user.name}" />
+   
+							<button id="btnQuyenGop"><a href="#">Kết thúc Quyên góp</a></button>
+									</c:if>		
+									</c:if>
+							
 							</div>
 					</li>
 				</ul>
@@ -218,30 +258,39 @@
 				</div>
 		</section>
 
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Về chúng tôi</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, arcu ac ultrices luctus, justo erat viverra arcu, ut rutrum erat lacus non odio.</p>
+      </div>
+      <div class="col-md-3">
+        <h3>Liên kết nhanh</h3>
+        <ul class="footer-links">
+          <li><a href="/">Trang chủ</a></li>
+          <li><a href="#">Về chúng tôi</a></li>
+          <li><a href="#">Hoàn cảnh quyên góp</a></li>
+          <li><a href="#">Đối tác đồng hành</a></li>
+          <li><a href="#">Tin tức cộng đồng</a></li>
+          <li><a href="#">Liên hệ</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3>Liên hệ</h3>
+        <p>123 ABC Street, XYZ City, ABC Country</p>
+        <p>Email: info@example.com</p>
+        <p>Phone: +123 456 7890</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p class="text-muted">&copy; 2023 Website Donation. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
-		<script>
-    $(document).ready(function() {
-        const modal = document.getElementById("modal");
-        const btnQuyenGop = document.getElementById("btnQuyenGop");
-        const btnClose = document.getElementById("btnClose");
-
-        // Khi nhấp vào nút "Quyên góp", hiển thị modal
-        btnQuyenGop.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // Khi nhấp vào nút đóng, ẩn modal
-        btnClose.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Khi nhấp vào bất kỳ vị trí nào ngoài modal, ẩn modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    });
-</script>
+	
 </body>
 </html>

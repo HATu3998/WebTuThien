@@ -196,3 +196,52 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+#btnQuyenGop {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 16px;
+}
+#btnQuyenGop a {
+  text-decoration: none; /* Bỏ dấu gạch chân */
+  color: white; /* Đổi màu chữ thành trắng */
+}
+
+
+/* CSS cho footer */
+.site-footer {
+  background-color: #f5f5f5;
+  padding: 40px 0;
+}
+
+.site-footer h3 {
+  color: #333;
+}
+
+.site-footer p {
+  color: #777;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #777;
+}
+
+.footer-links a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.text-muted {
+  color: #777;
+}
+
+.text-center {
+  text-align: center;
+}
+

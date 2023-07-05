@@ -66,6 +66,13 @@ public class InsertUserQuyenGop extends HttpServlet {
 
             Integer newTienValue = Integer.parseInt(tuThien.getTien()) + tienInteger;
             tuThien.setTien(newTienValue.toString());
+            tuThien.setTrangThai(2);
+      
+            int newTrangThai=Integer.parseInt(tuThien.getTongTien());
+            if(newTienValue>=newTrangThai) {
+            	 tuThien.setTrangThai(3);
+            }
+           
             session.update(tuThien);
      
             

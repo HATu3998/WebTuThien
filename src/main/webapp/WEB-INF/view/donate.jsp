@@ -18,8 +18,8 @@
 							<!-- Các trường thông tin quyên góp ở đây -->
 							<input type="text" name="noiDung" placeholder="noiDung">
 							<input type="text" name="tien" placeholder="Số tiền quyên góp">
-							<input type="text" name="tuThien_id" placeholder="TtuThien_id" value="${param.tuthienId}" />
-							<input type="text" name="autho_username" placeholder="autho_username" value="${param.infoId}" />
+							<input type="hidden" name="tuThien_id" placeholder="TtuThien_id" value="${param.tuthienId}" />
+							<input type="hidden" name="autho_username" placeholder="autho_username" value="${param.infoId}" />
 							
 							<button type="submit">Gửi quyên góp</button>
 						</form:form>

@@ -3,7 +3,7 @@ package com.servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import com.luv2code.springsecurity.entity.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,24 +15,40 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.hibernate.utils.HibernateUtil;
 import com.DAO.PaginationUtils;
+import com.hibernate.utils.HibernateUtil;
+import com.luv2code.springsecurity.entity.Info;
+import com.luv2code.springsecurity.entity.TuThien;
 
-@WebServlet("/TuThienServlet")
-public class TuThienServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private SessionFactory sessionFactory;
+/**
+ * Servlet implementation class AdminServlet
+ */
+@WebServlet("/AdminServlet")
+public class AdminServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	  private SessionFactory sessionFactory;
 
-    @Override
-    public void init() throws ServletException {
-        sessionFactory = HibernateUtil.getSessionFactory();
+	    @Override
+	    public void init() throws ServletException {
+	        sessionFactory = HibernateUtil.getSessionFactory();
+	    }
+
+	    @Override
+		 public void destroy() {
+		     sessionFactory.close();
+		 }
+    public AdminServlet() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
- 
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int page = 1;
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+	    int page = 1;
         int pageSize = 3;
         
         // Read the page parameter from the request if it exists
@@ -66,16 +82,13 @@ public class TuThienServlet extends HttpServlet {
             request.setAttribute("tuList", paginatedList);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("currentPage", page);
-            request.getRequestDispatcher("/file").forward(request, response);
+            request.getRequestDispatcher("/systems").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.print("lỗi");
         }
-    }
-	 @Override
-	 public void destroy() {
-	     sessionFactory.close();
-	 }
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
