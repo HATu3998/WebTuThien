@@ -7,245 +7,112 @@
 
 <%@ page import="com.luv2code.springsecurity.entity.*"%>
 <%@ page import="java.util.List"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Page</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet" crossorigin="anonymous">
-<style>
-body {
-	font-family: Arial, sans-serif;
-	line-height: 1.6;
-	margin: 0;
-	padding: 0;
-	background-image: url('your-background-image.jpg');
-	background-size: cover;
-	background-position: center;
-}
+    
+    <style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-	background-color: #333;
-	color: #fff;
-	padding: 10px;
-	text-align: center;
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-nav {
-	background-color: #444;
-	color: #fff;
-	padding: 10px;
-}
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
 
-nav ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-}
+        .nav {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+        }
 
-nav ul li {
-	margin: 0 10px;
-}
+        .nav button {
+            background-color: #ccc;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
 
-nav ul li a {
-	color: #fff;
-	text-decoration: none;
-	padding: 5px 10px;
-	border-radius: 5px;
-}
-
-nav ul li a:hover {
-	background-color: #555;
-}
-
-.container {
-	max-width: 1200px;
-	margin: 20px auto;
-	padding: 20px;
-	background-color: rgba(255, 255, 255, 0.8);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-radius: 5px;
-}
-
-footer {
-	background-color: #333;
-	color: #fff;
-	text-align: center;
-	padding: 10px;
-}
-
-
-<%@ include file="./CSS/style.css" %>
-
-
-</style>
+        .content {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            margin-top: 10px;
+        }
+ <%@ include file="./CSS/style.css" %>
+ 
+       
+    </style>
 </head>
 <body>
-	<header>
-		<h1>Admin Page</h1>
-	</header>
+<security:authorize access="hasRole('ADMIN')">
+      <div class="header">
+            <h1>Welcome to the Admin Page</h1>
+        </div>
 
-	<nav>
-		<ul>
-			<li><a href="#">Dashboard</a></li>
-			<li><a href="#">Users</a></li>
-			<li><a href="#">Settings</a></li>
-			<li><a href="#">Logout</a></li>
-		</ul>
-	</nav>
-
-	<div class="container">
-		<h2>Welcome, Admin!</h2>
-		<p>This is the admin page content.</p>
-
-		<!-- Modal Trigger Button -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#myModal1">Tạo dự án</button>
-
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#myModal2">Open Modal</button>
+	<div class="nav">
+		<button id="btn1">
+			<a href="./">Về trang chủ</a>
+		</button>
+		<button id="btn2">Button 2</button>
+		<button id="btn3">Button 3</button>
+		<button id="btn4">Button 4</button>
+		<button id="btn5">Button 5</button>
+		<button id="btn6">
+			<div class="logout-form">
 			
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#myModal3">Open Modal</button>
-			
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#myModal4">Open Modal</button>
-		
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#myModal5">Open Modal</button>
-			
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#myModal6">Open Modal</button>
-		<!-- Modal -->
-		<!-- Modal 1 -->
-<div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tạo dự án</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-             <form action="./InsertTuThien" method="get">
-    <table>
-        <tr>
-            <td><input type="text" name="ten" placeholder="Tên"></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="ngayKetThuc" placeholder="Chọn số ngày kết thúc"></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="toChuc" placeholder="Tổ chức"></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="sdt" placeholder="SDT"></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="tongTien" placeholder="Tiền"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Submit"></td>
-        </tr>
-    </table>
-</form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+					<form:form action="${pageContext.request.contextPath}/logout"
+						method="POST">
+						<input type="submit" value="Logout" />
+					</form:form>
+				
+			</div>
+		</button>
+	</div>
 
-<!-- Modal 2 -->
-<div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Chọn dự án</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal 2 content goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade" id="myModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal 1 Title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal 3 content goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
+	<div class="buttons">
+        <button id="btn1">Danh Sách</button>
+        <button id="btn2">Tạo Dự Án</button>
+        <button id="btn3">Button 3</button>
+        <button id="btn4">Button 4</button>
+        <button id="btn5">Button 5</button>
+        <button id="btn6">Button 6</button>
     </div>
-</div>
-<div class="modal fade" id="myModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal 1 Title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal 4 content goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="myModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal 1 Title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal 5 content goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="myModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal 1 Title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Modal 6content goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Tương tự cho Modal 3, Modal 4, Modal 5, Modal 6 -->
-<% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
+
+    <div id="content1" class="content">
+       
+		<section class="site-section">
+			<div class="container">
+				<div class="row mb-5 justify-content-center">
+					<div class="col-md-7 text-center">
+						<h2 class="section-title mb-2">Các đợt quyên góp</h2>
+					</div>
+				</div>					
+				<% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
 				<ul class="job-listings mb-5">
 					<li style="margin-bottom: 20px"
 						class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
@@ -289,12 +156,25 @@ footer {
 								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
 							</div>
 							<div class="job-listing-meta custom-width w-20">
+							<c:if test="<%=tu.getTrangThai() == 3%>">
+									<c:set var="user" value="${pageContext.request.userPrincipal}" />
+							<c:if test="${not empty user}">
+   <c:set var="userId" value="${user.name}" />
+   
+							<button id="btnQuyenGop" ><a href="#">Đóng Quyên góp</a></button>
+									</c:if>		
+									</c:if>
+									
+								
 							
 							</div>
 					</li>
 				</ul>
+
+				
 				<% } %>
-<div class="row pagination-wrap">
+
+				<div class="row pagination-wrap">
 					<div class="col-md-6 text-center text-md-left mb-4 mb-md-0"></div>
 					<div class="col-md-6 text-center text-md-right">
 						<%-- Hiển thị các nút trang --%>
@@ -325,13 +205,175 @@ footer {
 				</div>
 		</section>
 
+    </div>
 
-	<footer>
-		<p>&copy; 2023 Admin Page. All rights reserved.</p>
-	</footer>
+    <div id="content2" class="content">
+       <form action="./InsertTuThien" method="get">
+    <table>
+        <tr>
+            <td><input type="text" name="ten" placeholder="Tên"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="ngayKetThuc" placeholder="Chọn số ngày kết thúc"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="toChuc" placeholder="Tổ chức"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="sdt" placeholder="SDT"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="tongTien" placeholder="Tiền"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"></td>
+        </tr>
+    </table>
+</form>
+    </div>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+    <div id="content3" class="content">
+       
+		<section class="site-section">
+			<div class="container">
+				<div class="row mb-5 justify-content-center">
+					<div class="col-md-7 text-center">
+						<h2 class="section-title mb-2">Xóa</h2>
+					</div>
+				</div>	
+				
+				
+  			
+				<% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
+				<ul class="job-listings mb-5">
+					<li style="margin-bottom: 20px"
+						class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+						<div
+							class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+							<div class="job-listing-position custom-width  mb-3 mb-sm-0"
+								style="padding: 10px; width: 250px">
+								<h2><%=tu.getTen() %></h2>
+								<strong> <c:if test="<%=tu.getTrangThai() == 1%>">
+										<c:out value="Mới khởi tạo" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 2%>">
+										<c:out value="Đang quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 3%>">
+										<c:out value="Kết thúc đợt quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 4%>">
+										<c:out value="Đóng quyên góp" />
+									</c:if>
+
+								</strong>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Ngày bắt đầu<br> <strong><%=tu.getNgayBatDau() %></strong><br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Ngày kết thúc<br> <strong><%=tu.getNgayKetThuc()%></strong><br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-25"
+								style="padding: 10px;">
+								<span class="icon-room"></span> <span>Tên tổ chức: <strong><%=tu.getToChuc() %></strong></span><br>
+								<p>
+									SDT: <strong><%=tu.getSdt() %></strong></p> 
+								<br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
+							</div>
+							<div class="job-listing-meta custom-width w-20">
+							 
+   
+						<input type="button" id="btnQuyenGop"><a href="./DeleTuThien?id=<%= tu.getId() %>">Xóa</a>
+ 
+									
+								
+							
+							</div>
+					</li>
+				</ul>
+
+				
+				<% } %>
+
+				<div class="row pagination-wrap">
+					<div class="col-md-6 text-center text-md-left mb-4 mb-md-0"></div>
+					<div class="col-md-6 text-center text-md-right">
+						<%-- Hiển thị các nút trang --%>
+						<% int totalPages2 = (int) request.getAttribute("totalPages"); %>
+						<% int currentPage2 = (int) request.getAttribute("currentPage"); %>
+
+						<div class="pagination">
+							<p>
+								<% if (currentPage2 > 1) { %>
+								<a href="?page=<%= currentPage2 - 1 %>"> Prev </a>
+								<% } %>
+							</p>
+
+							<p>
+								<% for (int i = 1; i <= totalPages2; i++) { %>
+								<%-- Hiển thị các nút trang --%>
+								<a href="?page=<%= i %>"><%= i %></a>
+								<% } %>
+							</p>
+
+							<p>
+								<% if (currentPage2 < totalPages2) { %>
+								<a href="?page=<%= currentPage2 + 1 %>"> Next </a>
+								<% } %>
+							</p>
+						</div>
+					</div>
+				</div>
+		</section>
+    </div>
+
+    <div id="content4" class="content">
+        <h2>Content 4</h2>
+        <p>This is the content for Button 4.</p>
+    </div>
+
+    <div id="content5" class="content">
+        <h2>Content 5</h2>
+        <p>This is the content for Button 5.</p>
+    </div>
+
+    <div id="content6" class="content">
+        <h2>Content 6</h2>
+        <p>This is the content for Button 6.</p>
+    </div>
+</security:authorize>
+    <script>
+        // Lấy các phần tử button và content
+        const buttons = document.querySelectorAll('.buttons button');
+        const contents = document.querySelectorAll('.content');
+
+        // Ẩn tất cả các content
+        contents.forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Hiển thị content mặc định
+        contents[0].style.display = 'block';
+
+        // Bắt sự kiện click cho từng button
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                // Ẩn tất cả các content
+                contents.forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Hiển thị content tương ứng với button được nhấp vào
+                contents[index].style.display = 'block';
+            });
+        });
+    </script>
 </body>
 </html>
