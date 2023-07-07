@@ -97,8 +97,8 @@
 	<div class="buttons">
         <button id="btn1">Danh Sách</button>
         <button id="btn2">Tạo Dự Án</button>
-        <button id="btn3">Button 3</button>
-        <button id="btn4">Button 4</button>
+        <button id="btn3">Xóa Dự Án</button>
+        <button id="btn4">Sửa Dự Án</button>
         <button id="btn5">Button 5</button>
         <button id="btn6">Button 6</button>
     </div>
@@ -290,7 +290,7 @@
 							<div class="job-listing-meta custom-width w-20">
 							 
    
-						<input type="button" id="btnQuyenGop"><a href="./DeleTuThien?id=<%= tu.getId() %>">Xóa</a>
+						<input type="button" ><a href="./DeleTuThien?id=<%= tu.getId() %>">Xóa</a>
  
 									
 								
@@ -335,8 +335,104 @@
     </div>
 
     <div id="content4" class="content">
-        <h2>Content 4</h2>
-        <p>This is the content for Button 4.</p>
+        	<section class="site-section">
+			<div class="container">
+				<div class="row mb-5 justify-content-center">
+					<div class="col-md-7 text-center">
+						<h2 class="section-title mb-2">Xóa</h2>
+					</div>
+				</div>	
+				
+				
+  			
+				<% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
+				<ul class="job-listings mb-5">
+					<li style="margin-bottom: 20px"
+						class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+						<div
+							class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+							<div class="job-listing-position custom-width  mb-3 mb-sm-0"
+								style="padding: 10px; width: 250px">
+								<h2><%=tu.getTen() %></h2>
+								<strong> <c:if test="<%=tu.getTrangThai() == 1%>">
+										<c:out value="Mới khởi tạo" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 2%>">
+										<c:out value="Đang quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 3%>">
+										<c:out value="Kết thúc đợt quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 4%>">
+										<c:out value="Đóng quyên góp" />
+									</c:if>
+
+								</strong>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Ngày bắt đầu<br> <strong><%=tu.getNgayBatDau() %></strong><br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Ngày kết thúc<br> <strong><%=tu.getNgayKetThuc()%></strong><br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-25"
+								style="padding: 10px;">
+								<span class="icon-room"></span> <span>Tên tổ chức: <strong><%=tu.getToChuc() %></strong></span><br>
+								<p>
+									SDT: <strong><%=tu.getSdt() %></strong></p> 
+								<br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
+							</div>
+							<div class="job-listing-meta custom-width w-20">
+							 
+   
+						<input type="button" ><a href="./GetById?tuThien_id=<%= tu.getId() %>">Update</a>
+ 
+									
+								
+							
+							</div>
+					</li>
+				</ul>
+
+				
+				<% } %>
+
+				<div class="row pagination-wrap">
+					<div class="col-md-6 text-center text-md-left mb-4 mb-md-0"></div>
+					<div class="col-md-6 text-center text-md-right">
+						<%-- Hiển thị các nút trang --%>
+						<% int totalPages3 = (int) request.getAttribute("totalPages"); %>
+						<% int currentPage3 = (int) request.getAttribute("currentPage"); %>
+
+						<div class="pagination">
+							<p>
+								<% if (currentPage3 > 1) { %>
+								<a href="?page=<%= currentPage3 - 1 %>"> Prev </a>
+								<% } %>
+							</p>
+
+							<p>
+								<% for (int i = 1; i <= totalPages3; i++) { %>
+								<%-- Hiển thị các nút trang --%>
+								<a href="?page=<%= i %>"><%= i %></a>
+								<% } %>
+							</p>
+
+							<p>
+								<% if (currentPage2 < totalPages2) { %>
+								<a href="?page=<%= currentPage2 + 1 %>"> Next </a>
+								<% } %>
+							</p>
+						</div>
+					</div>
+				</div>
+		</section>
     </div>
 
     <div id="content5" class="content">

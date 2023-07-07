@@ -24,7 +24,11 @@ public class DemoController {
 		
 		return "leaders";
 	}
-	
+	@GetMapping("/updateTuThien")
+	public String updateTuThien() {
+		
+		return "updateTuThien";
+	}
 	// add request mapping for /systems
 	
 	@GetMapping("/systems")
