@@ -50,7 +50,9 @@
 </head>
 <body>
     <h1>Update TuThien</h1>
-    <p>"${error}"</p>
+   <c:if test="${not empty error}">
+    <p style="color: red">${error}</p>
+</c:if>
     <table>
         <thead>
             <tr>
@@ -62,7 +64,7 @@
                 <th>SDT</th>
                 <th>Tien</th>
                 <th>TongTien</th>
-                <th>TrangThai</th>
+              
             </tr>
         </thead>
         <tbody>
@@ -77,17 +79,7 @@
                     <td><input type="text" name="sdt" placeholder="sdt" value="${tuThien.sdt}"></td>
                     <td><input type="hidden" name="tien" placeholder="tien" value="${tuThien.tien}"  ></td>
                     <td><input type="text" name="tongTien" placeholder="tongTien" value="${tuThien.tongTien}"></td>
-           <td>	<select name="trangThai">
-    
-            <option value="1" ${tuThien.trangThai == 1 ? 'selected' : ''}>mới khởi tạo</option>
-            <option value="2" ${tuThien.trangThai == 2 ? 'selected' : ''}>đang quyên góp</option>
-            <option value="3" ${tuThien.trangThai == 3 ? 'selected' : ''}>kết thúc quyên góp</option>
-            <option value="4" ${tuThien.trangThai == 4 ? 'selected' : ''}>đóng quyên góp</option>
-     
-</select>
-
-  		
-        </td>
+          
                 </tr>
                 <tr>
                     <td colspan="9" style="text-align: center;">

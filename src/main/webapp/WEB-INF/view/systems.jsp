@@ -10,18 +10,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Page</title>
-    <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet" crossorigin="anonymous">
+     <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet" crossorigin="anonymous">
-    
-    <style>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,9 +54,6 @@
             background-color: #fff;
             margin-top: 10px;
         }
- <%@ include file="./CSS/style.css" %>
- 
-       
     </style>
 </head>
 <body>
@@ -99,7 +88,7 @@
         <button id="btn2">Tạo Dự Án</button>
         <button id="btn3">Xóa Dự Án</button>
         <button id="btn4">Sửa Dự Án</button>
-        <button id="btn5">Button 5</button>
+        <button id="btn5">Cập nhật Dự Án</button>
         <button id="btn6">Button 6</button>
     </div>
 
@@ -156,14 +145,7 @@
 								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
 							</div>
 							<div class="job-listing-meta custom-width w-20">
-							<c:if test="<%=tu.getTrangThai() == 3%>">
-									<c:set var="user" value="${pageContext.request.userPrincipal}" />
-							<c:if test="${not empty user}">
-   <c:set var="userId" value="${user.name}" />
-   
-							<button id="btnQuyenGop" ><a href="#">Đóng Quyên góp</a></button>
-									</c:if>		
-									</c:if>
+							
 									
 								
 							
@@ -436,8 +418,99 @@
     </div>
 
     <div id="content5" class="content">
-        <h2>Content 5</h2>
-        <p>This is the content for Button 5.</p>
+     
+      <section class="site-section">
+			<div class="container">
+				<div class="row mb-5 justify-content-center">
+					<div class="col-md-7 text-center">
+						<h2 class="section-title mb-2">Cập nhật trạng thái</h2>
+					</div>
+				</div>					
+				<% for (TuThien tu : (List<TuThien>) request.getAttribute("tuList")) { %>
+				<ul class="job-listings mb-5">
+					<li style="margin-bottom: 20px"
+						class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+						<div
+							class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+							<div class="job-listing-position custom-width  mb-3 mb-sm-0"
+								style="padding: 10px; width: 250px">
+								<h2><%=tu.getTen() %></h2>
+								<strong> <c:if test="<%=tu.getTrangThai() == 1%>">
+										<c:out value="Mới khởi tạo" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 2%>">
+										<c:out value="Đang quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 3%>">
+										<c:out value="Kết thúc đợt quyên góp" />
+									</c:if>
+									<c:if test="<%=tu.getTrangThai() == 4%>">
+										<c:out value="Đóng quyên góp" />
+									</c:if>
+
+								</strong>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Ngày bắt đầu<br> <%=tu.getNgayBatDau() %><br>
+							</div>
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Ngày kết thúc<br> <%=tu.getNgayKetThuc()%><br>
+							</div>
+							
+							<div class="job-listing-location mb-3 mb-sm-0 custom-width w-10"
+								style="padding: 10px;">
+								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
+							</div>
+							
+							<c:if test="<%=tu.getTrangThai() != 4%>">
+							<div class="job-listing-meta custom-width w-20">
+<button class="btn" ><a href="./StatusTuThienServlet?id=<%= tu.getId() %>&&status=1">Mới Khởi Tạo</a></button>	</div>
+<div class="job-listing-meta custom-width w-20">
+<button class="btn" ><a href="./StatusTuThienServlet?id=<%= tu.getId() %>&&status=2">Đang Quyên Góp</a></button>		</div>						
+<div class="job-listing-meta custom-width w-20">
+<button class="btn" ><a href="./StatusTuThienServlet?id=<%= tu.getId() %>&&status=3">Kết Thúc Quyên Góp</a></button>		</div>							
+	<div class="job-listing-meta custom-width w-20">
+	<button class="btn" ><a href="./StatusTuThienServlet?id=<%= tu.getId() %>&&status=4">Đóng Quyên Góp</a></button>		</div>							
+	</c:if>
+						
+					</li>
+				</ul>
+
+				
+				<% } %>
+
+				<div class="row pagination-wrap">
+					<div class="col-md-6 text-center text-md-left mb-4 mb-md-0"></div>
+					<div class="col-md-6 text-center text-md-right">
+						<%-- Hiển thị các nút trang --%>
+						<% int totalPages5 = (int) request.getAttribute("totalPages"); %>
+						<% int currentPage5 = (int) request.getAttribute("currentPage"); %>
+
+						<div class="pagination">
+							<p>
+								<% if (currentPage5 > 1) { %>
+								<a href="?page=<%= currentPage - 1 %>"> Prev </a>
+								<% } %>
+							</p>
+
+							<p>
+								<% for (int i = 1; i <= totalPages5; i++) { %>
+								<%-- Hiển thị các nút trang --%>
+								<a href="?page=<%= i %>"><%= i %></a>
+								<% } %>
+							</p>
+
+							<p>
+								<% if (currentPage5 < totalPages5) { %>
+								<a href="?page=<%= currentPage5 + 1 %>"> Next </a>
+								<% } %>
+							</p>
+						</div>
+					</div>
+				</div>
+		</section>
     </div>
 
     <div id="content6" class="content">

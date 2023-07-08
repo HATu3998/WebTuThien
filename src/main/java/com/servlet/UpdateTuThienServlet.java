@@ -44,63 +44,45 @@ public class UpdateTuThienServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Lấy thông tin từ request
+        String id = request.getParameter("id");
+        String ten = request.getParameter("ten");
+        String ngayBatDau = request.getParameter("ngayBatDau");
+        String ngayKetThuc = request.getParameter("ngayKetThuc");
+        int ngayKetThucN = Integer.parseInt(ngayKetThuc);
+        String toChuc = request.getParameter("toChuc");
+        String sdt = request.getParameter("sdt");
+        String tien = request.getParameter("tien");
+        String tongTien = request.getParameter("tongTien");
+    
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
 
-		String id = request.getParameter("id");
-    	String ten = request.getParameter("ten");
-    	String ngayBatDau = request.getParameter("ngayBatDau");
-    	String ngayKetThuc = request.getParameter("ngayKetThuc");
-    	  int ngayKetThucN = Integer.valueOf(ngayKetThuc);
-    	String toChuc = request.getParameter("toChuc");
-    	String sdt = request.getParameter("sdt");
-    	String tien = request.getParameter("tien");
-    	String tongTien = request.getParameter("tongTien");
-    	String trangThai = request.getParameter("trangThai");
-    	int trang=Integer.valueOf(trangThai);
-    	Session session = sessionFactory.openSession();
-    	 Transaction tx = session.beginTransaction();
-    	  if (id != null && !id.isEmpty()) {
-    		  Long Tuid = Long.parseLong(id);
-              TuThien tuThien = GetId.getEntityById(Tuid);
-              
-              if (tuThien != null) {
-            	  tuThien.setTen(ten);
-            	  tuThien.setNgayKetThuc(LocalDate.now().plusDays(ngayKetThucN));
-            	  tuThien.setToChuc(toChuc);
-            	  tuThien.setSdt(sdt);
-            	  tuThien.setTongTien(tongTien);
-            	  if(trangThai.equals("1") && tuThien.getTrangThai()==4) {
-            		 
-            		  session.update(tuThien);
-                	  tx.commit();
-            		  request.setAttribute("error", "đã đóng quyên góp không thể thực hiện thay đổi trạng thái");
-                      request.getRequestDispatcher("/updateTuThien").forward(request, response);
-            	  }else  if(trangThai.equals("2") && tuThien.getTrangThai()==4) {
-            		  session.update(tuThien);
-                	  tx.commit();
-            		  request.setAttribute("error", "đã đóng quyên góp không thể thực hiện thay đổi trạng thái");
-                      request.getRequestDispatcher("/updateTuThien").forward(request, response);
-            	  }else  if(trangThai.equals("3") && tuThien.getTrangThai()==4) {
-            		  session.update(tuThien);
-                	  tx.commit();
-            		  request.setAttribute("error", "đã đóng quyên góp không thể thực hiện thay đổi trạng thái");
-                      request.getRequestDispatcher("/updateTuThien").forward(request, response);
-            	  }else {
-            		  tuThien.setTrangThai(trang);
-            	  session.update(tuThien);
-            	  tx.commit();
-                  request.setAttribute("tuThien", tuThien);
-                  request.getRequestDispatcher("/updateTuThien").forward(request, response);}
-              } else {
-                  response.sendError(HttpServletResponse.SC_NOT_FOUND, "TuThien with id " + id + " not found");
-              }
-    	  } else {
-              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing id");
-          
-    	  }
-    	
-	}
+        if (id != null && !id.isEmpty()) {
+            Long Tuid = Long.parseLong(id);
+            TuThien tuThien = GetId.getEntityById(Tuid);
+
+            if (tuThien != null) {
+                tuThien.setTen(ten);
+                tuThien.setNgayKetThuc(LocalDate.now().plusDays(ngayKetThucN));
+                tuThien.setToChuc(toChuc);
+                tuThien.setSdt(sdt);
+                tuThien.setTongTien(tongTien);
+
+                  
+                        session.update(tuThien);
+                        tx.commit();
+                        request.setAttribute("tuThien", tuThien);
+                        request.getRequestDispatcher("/updateTuThien").forward(request, response);
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "TuThien with id " + id + " not found");
+            }
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing id");
+        }
+    }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
