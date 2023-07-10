@@ -9,7 +9,9 @@
 	<title>Login Page</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<!-- Reference Bootstrap files -->
 	<link rel="stylesheet"
 		 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,45 +19,96 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body {
+    font-family: "Lato", sans-serif;
+}
 
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+</style>
 </head>
 
 <body>
-
-	<div>
-		
-		<div id="loginbox" style="margin-top: 50px;"
-			class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
-			
-			<div class="panel panel-info">
-
-				<div class="panel-heading">
-					<div class="panel-title">Sign In</div>
-				</div>
-
-				<div style="padding-top: 30px" class="panel-body">
-
-					<!-- Login Form -->
-					<form action="${pageContext.request.contextPath}/authenticateTheUser" 
-						  method="POST" class="form-horizontal">
-
-					    <!-- Place for messages: error, alert etc ... -->
-					    <div class="form-group">
-					        <div class="col-xs-15">
-					            <div>
-								
-									<!-- Check for login error -->
-								
-									<c:if test="${param.error != null}">
+<div class="sidenav">
+         <div class="login-main-text">
+         <c:if test="${param.error != null}">
 										
 										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
 											Invalid username and password.
 										</div>
 		
 									</c:if>
-										
-									<!-- Check for logout -->
-
+									
 									<c:if test="${param.logout != null}">
 										            
 										<div class="alert alert-success col-xs-offset-1 col-xs-10">
@@ -63,47 +116,37 @@
 										</div>
 								    
 									</c:if>
-									
-					            </div>
-					        </div>
-					    </div>
-
-						<!-- User name -->
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							
-							<input type="text" name="username" placeholder="username" class="form-control">
-						</div>
-
-						<!-- Password -->
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
-							
-							<input type="password" name="password" placeholder="password" class="form-control" >
-						</div>
-
-						<!-- Login/Submit Button -->
-						<div style="margin-top: 10px" class="form-group">						
-							<div class="col-sm-6 controls">
-								<button type="submit" class="btn btn-success">Login</button>
-							</div>
-						</div>
-
-						<!-- I'm manually adding tokens ... Bro! -->
-
-						<input type="hidden"
+            <h2>Application<br> Login Page</h2>
+            <p>Login or register from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form action="${pageContext.request.contextPath}/authenticateTheUser" 
+						  method="POST" class="form-horizontal">
+                  <div class="form-group">
+                     <label>User Name</label>
+                     <input type="text" name="username" class="form-control" placeholder="User Name">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" name="password" class="form-control" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-black">Login</button>
+                  <button type="submit" class="btn btn-secondary"><a href="${pageContext.request.contextPath}/Register">Register</a></button>
+              
+				<input type="hidden"
 							   name="${_csrf.parameterName}"
 							   value="${_csrf.token}" />
-						
-					</form>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
+               </form>
+            </div>
+         </div>
+      </div>
+	<div>
+		
+		
+		<a href="${pageContext.request.contextPath}/">Back to Home Page</a>
 
 </body>
 </html>

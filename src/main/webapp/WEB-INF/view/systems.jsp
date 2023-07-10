@@ -13,47 +13,140 @@
      <title>Admin Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    nav > .nav.nav-tabs {
+  border: none;
+  color: #fff;
+  background: #272e38;
+  border-radius: 0;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active {
+  border: none;
+  padding: 18px 25px;
+  color: #fff;
+  background: #272e38;
+  border-radius: 0;
+}
 
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
+nav > div a.nav-item.nav-link.active:after {
+  content: "";
+  position: relative;
+  bottom: -60px;
+  left: -10%;
+  border: 15px solid transparent;
+  border-top-color: #e74c3c ;
+}
 
-        .nav {
-            background-color: #f4f4f4;
-            padding: 10px;
-            text-align: center;
-        }
+.tab-content {
+  background: #fdfdfd;
+  line-height: 25px;
+  border: 1px solid #ddd;
+  border-top: 5px solid #e74c3c;
+  border-bottom: 5px solid #e74c3c;
+  padding: 30px 25px;
+}
 
-        .nav button {
-            background-color: #ccc;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-        }
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link:focus {
+  border: none;
+  background: #e74c3c;
+  color: #fff;
+  border-radius: 0;
+  transition: background 0.20s linear;
+}
 
-        .content {
-            display: none;
-            padding: 20px;
-            background-color: #fff;
-            margin-top: 10px;
-        }
+.container {
+  margin-top: 50px;
+}
+
+.job-listings {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.job-listing {
+  display: flex;
+  align-items: center;
+}
+
+.job-listing-about {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.job-listing-position {
+  width: 250px;
+  padding: 10px;
+}
+
+.job-listing-location {
+  width: 10%;
+  padding: 10px;
+}
+
+.job-listing-meta {
+  width: 20%;
+}
+
+.pagination-wrap {
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a {
+  margin: 0 5px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.content {
+  margin-top: 50px;
+}
+
+.content table {
+  margin-bottom: 20px;
+}
+
+.content input[type="text"],
+.content input[type="submit"] {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 15px;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  transition: background 0.20s linear;
+}
+
+.btn a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #c0392b;
+}
+
     </style>
 </head>
 <body>

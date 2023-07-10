@@ -54,6 +54,10 @@ public class DemoController {
 		
 	}
 	
+	@GetMapping("/Register")
+	public String Register() {
+		return "Register";
+	}
 	@GetMapping("/donate")
 	public String donate() {
 		

@@ -22,6 +22,13 @@ public class User {
 		return username;
 	}
 
+	public User(String username, String password, Integer enabled) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}

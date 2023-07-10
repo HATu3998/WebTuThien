@@ -35,7 +35,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	    http.authorizeRequests()
-	    .antMatchers("/","/index","/TuThienServlet", "/CSS/style", "/file").permitAll() // Cho phép truy cập công khai cho các trang/index, CSS/style, file
+	    .antMatchers("/","/index","/TuThienServlet", "/CSS/style", "/file","/Register","/InsertServlet").permitAll() // Cho phép truy cập công khai cho các trang/index, CSS/style, file
         .anyRequest().authenticated()
         .and()
         .formLogin()
