@@ -12,6 +12,7 @@ INSERT INTO `users` VALUES ('Atus','{noop}123456',1), ('mary','{noop}test123',0)
 
 
 CREATE TABLE `authorities` (
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `username` varchar(50) NOT NULL,
   `authority` varchar(50) NOT NULL,
   UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
