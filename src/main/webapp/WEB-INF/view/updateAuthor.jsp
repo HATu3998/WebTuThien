@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +50,7 @@
     </style>
 </head>
 <body>
+<security:authorize access="hasRole('ADMIN')">
     <h1>Update User</h1>
    <c:if test="${not empty error}">
     <p style="color: red">${error}</p>
@@ -58,30 +60,42 @@
             <tr>
              
                 <th>Ten</th>
-                <th>email</th>
-                <th>sdt</th>
-                <th>username</th>
+               
                
               
             </tr>
         </thead>
         <tbody>
-            <form action="${pageContext.request.contextPath}/UpdateUserServlet" method="GET">
-                <!-- Các trường thông tin quyên góp ở đây -->
-                <tr>
-                    <td><input type="text" name="ten" placeholder="ten" value="${infoList.hoTen}" ></td>
-                    <td><input type="text" name="email" placeholder="email" value="${infoList.email}"></td>
-                    <td><input type="text" name="sdt" placeholder="sdt" value="${infoList.sdt}" ></td>
-                  <td><input type="hidden" name="username" placeholder="username" value="${infoList.user.username}" >
-                  <p>${infoList.user.username}</p></td>
-                </tr>
-                <tr>
-                    <td colspan="9" style="text-align: center;">
-                        <button type="submit">Gửi quyên góp</button>
-                    </td>
-                </tr>
-            </form>
+     <form action="${pageContext.request.contextPath}/UpdateAuthority" method="get">
+    <tr>
+        <td><input type="text" name="user" placeholder="username" value="${authorList.user.username}" ></td>
+    </tr>
+
+           
+     
+            <tr>
+                <td>
+                    <input type="radio" name="authority" value="ROLE_EMPLOYEE" checked> ROLE_EMPLOYEE
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" name="authority" value="ROLE_ADMIN"> ROLE_ADMIN
+                </td>
+            </tr>
+     
+    <tr>
+    <c:if test="${authorList.authority eq 'ROLE_EMPLOYEE'}">
+        <td colspan="9" style="text-align: center;">
+            <button type="submit">Gửi quyên góp</button>
+        </td>
+        </c:if>
+    </tr>
+</form>
+
+
         </tbody>
     </table>
+    </security:authorize>
 </body>
 </html>

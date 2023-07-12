@@ -78,6 +78,14 @@ public class DemoController {
 		return "updateUser";
 		
 	}
+	
+
+	@GetMapping("/updateAuthor")
+	public String updateAuthor() {
+		
+		return "updateAuthor";
+		
+	}
 }
 
 

@@ -160,7 +160,7 @@ nav > div a.nav-item.nav-link:focus {
 			<a href="./">Về trang chủ</a>
 		</button>
 		<button id="btn2"><a href="./UserServlet">Quản lý User</a></button>
-		<button id="btn3">Button 3</button>
+		<button id="btn3"><a href="./AdminServlet">Trang Dự Án</a></button>
 		<button id="btn4">Button 4</button>
 		<button id="btn5">Button 5</button>
 		<button id="btn6">

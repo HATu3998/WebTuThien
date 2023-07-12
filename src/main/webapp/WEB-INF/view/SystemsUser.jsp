@@ -67,7 +67,7 @@
             <a href="./">Về trang chủ</a>
         </button>
         <button id="btn2"><a href="./UserServlet">Quản lý User</a></button>
-        <button id="btn3">Button 3</button>
+        <button id="btn3"><a href="./AdminServlet">Trang Dự Án</a></button>
         <button id="btn4">Button 4</button>
         <button id="btn5">Button 5</button>
         <button id="btn6">
@@ -83,9 +83,9 @@
         <button id="btn1">Danh Sách</button>
         <button id="btn2">Tạo Tài Khoản</button>
         <button id="btn3">Đóng Băng Tài Khoản</button>
-        <button id="btn4">Sửa Dự Án</button>
-        <button id="btn5">Cập nhật Dự Án</button>
-        <button id="btn6">Button 6</button>
+        <button id="btn4">cập nhật Thông tin Tài Khoản </button>
+        <button id="btn5">Loại tài khoản</button>
+       
     </div>
 
     <div id="content1" class="content">
@@ -228,7 +228,7 @@
             <div class="container">
                 <div class="row mb-5 justify-content-center">
                     <div class="col-md-7 text-center">
-                        <h2 class="section-title mb-2">Sửa </h2>
+                        <h2 class="section-title mb-2">Thông tin tài khoản </h2>
                     </div>
                 </div>
 
@@ -267,9 +267,40 @@
         </section>
     </div>
     
-    <div id="content4" class="content">
-        <h2>Content 6</h2>
-        <p>This is the content for Button 6.</p>
+    <div id="content5" class="content">
+         <section class="site-section">
+            <div class="container">
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-md-7 text-center">
+                        <h2 class="section-title mb-2">Loại tài khoản </h2>
+                    </div>
+                </div>
+
+                <c:forEach items="${auList}" var="tu">
+                    <ul class="job-listings mb-5">
+                        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                <div class="job-listing-position custom-width  mb-3 mb-sm-0" style="padding: 10px; width: 250px">
+                                    <h2>${tu.user.username} </h2>
+                                
+                                </div>
+                                <div class="job-listing-position custom-width  mb-3 mb-sm-0" style="padding: 10px; width: 250px">
+                                    <p>${tu.authority}</p>
+                                </div>
+                              
+                                
+                                <div class="job-listing-position custom-width  mb-3 mb-sm-0" style="padding: 10px; width: 250px">
+                                  
+                                   
+<button class="btn" ><a href="./GetByUserNameAuthority?name=${tu.user.username}">Update</a></button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </c:forEach>
+
+            
+        </section>
     </div>
 </security:authorize>
  <script>

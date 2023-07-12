@@ -44,4 +44,17 @@ public class GetId {
 	            session.close();
 	        }
 	    }
+	   
+	   public static Authority getEntityByAuthor(String id) {
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        try {
+	            session.beginTransaction();
+	            Query<Authority> query = session.createQuery("FROM Authority WHERE username = :id", Authority.class);
+	            query.setParameter("id", id);
+	            return query.uniqueResult();
+	        } finally {
+	            session.getTransaction().commit();
+	            session.close();
+	        }
+	    }
 }
