@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import org.hibernate.query.Query;
-import com.luv2code.springsecurity.entity.TuThien;
+import com.luv2code.springsecurity.entity.*;
 import com.luv2code.springsecurity.entity.UserQuyenGop;
 import com.hibernate.utils.HibernateUtil;
 
@@ -50,5 +50,7 @@ public class DeleDAO {
 	        session.close();
 	    }
 	}
+	
+	
 
 }

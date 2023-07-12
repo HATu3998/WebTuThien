@@ -51,9 +51,7 @@ public class UserInsert extends HttpServlet {
             userEntity.setEnabled(1);
 
             session.save(userEntity);
-        //    tx.commit();
-          
-        //    UserDAO.getEntityByUser(hoTen, email, sdt, userEntity);
+   
             Info info = new Info();
             info.setHoTen(hoTen);
             info.setEmail(email);

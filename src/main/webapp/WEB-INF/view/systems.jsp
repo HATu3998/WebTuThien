@@ -159,7 +159,7 @@ nav > div a.nav-item.nav-link:focus {
 		<button id="btn1">
 			<a href="./">Về trang chủ</a>
 		</button>
-		<button id="btn2">Button 2</button>
+		<button id="btn2"><a href="./UserServlet">Quản lý User</a></button>
 		<button id="btn3">Button 3</button>
 		<button id="btn4">Button 4</button>
 		<button id="btn5">Button 5</button>
@@ -363,9 +363,13 @@ nav > div a.nav-item.nav-link:focus {
 								Tiền<br> <strong><%=tu.getTien() %>/<%=tu.getTongTien() %></strong><br>
 							</div>
 							<div class="job-listing-meta custom-width w-20">
-							 
+												 
+
+<button class="btn" ><a href="./DeleTuThien?id=<%= tu.getId() %>">Xóa</a></button>	</div>
+					
+					 
    
-						<input type="button" ><a href="./DeleTuThien?id=<%= tu.getId() %>">Xóa</a>
+						
  
 									
 								
@@ -414,7 +418,7 @@ nav > div a.nav-item.nav-link:focus {
 			<div class="container">
 				<div class="row mb-5 justify-content-center">
 					<div class="col-md-7 text-center">
-						<h2 class="section-title mb-2">Xóa</h2>
+						<h2 class="section-title mb-2">Update</h2>
 					</div>
 				</div>	
 				
@@ -465,10 +469,9 @@ nav > div a.nav-item.nav-link:focus {
 							</div>
 							<div class="job-listing-meta custom-width w-20">
 							 
-   
-						<input type="button" ><a href="./GetById?tuThien_id=<%= tu.getId() %>">Update</a>
- 
-									
+
+<button class="btn" ><a href="./GetById?tuThien_id=<%= tu.getId() %>">Update</a></button>	</div>
+					
 								
 							
 							</div>

@@ -43,7 +43,7 @@ public class User {
 		this.password = password;
 	}
 
-	public Integer isEnabled() {
+	public Integer getEnabled() {
 		return enabled;
 	}
 

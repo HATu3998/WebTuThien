@@ -32,4 +32,16 @@ public class GetId {
 	            session.close();
 	        }
 	    }
+	   public static Info getEntityByInfo(String id) {
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        try {
+	            session.beginTransaction();
+	            Query<Info> query = session.createQuery("FROM Info WHERE username = :id", Info.class);
+	            query.setParameter("id", id);
+	            return query.uniqueResult();
+	        } finally {
+	            session.getTransaction().commit();
+	            session.close();
+	        }
+	    }
 }

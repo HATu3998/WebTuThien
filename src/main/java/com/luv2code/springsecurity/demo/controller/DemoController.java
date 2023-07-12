@@ -64,6 +64,20 @@ public class DemoController {
 		return "donate";
 		
 	}
+	
+	@GetMapping("/SystemsUser")
+	public String systemUser() {
+		
+		return "SystemsUser";
+		
+	}
+	
+	@GetMapping("/updateUser")
+	public String updateUser() {
+		
+		return "updateUser";
+		
+	}
 }
 
 
