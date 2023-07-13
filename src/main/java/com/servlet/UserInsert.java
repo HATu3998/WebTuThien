@@ -47,7 +47,7 @@ public class UserInsert extends HttpServlet {
 
             User userEntity = new User();
             userEntity.setUsername(user);
-            userEntity.setPassword(pass);
+            userEntity.setPassword("{noop}"+pass);
             userEntity.setEnabled(1);
 
             session.save(userEntity);

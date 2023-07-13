@@ -45,14 +45,8 @@ public class DemoController {
 		
 	}
 	
-	// add request mapping for /access-denied
 	
-	@GetMapping("/access-denied")
-	public String showAccessDenied() {
-		
-		return "access-denied";
-		
-	}
+
 	
 	@GetMapping("/Register")
 	public String Register() {
@@ -84,6 +78,13 @@ public class DemoController {
 	public String updateAuthor() {
 		
 		return "updateAuthor";
+		
+	}
+	
+	@GetMapping("/searchUser")
+public String searchResults() {
+		
+		return "searchUser";
 		
 	}
 }

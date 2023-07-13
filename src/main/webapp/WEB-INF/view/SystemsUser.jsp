@@ -68,8 +68,7 @@
         </button>
         <button id="btn2"><a href="./UserServlet">Quản lý User</a></button>
         <button id="btn3"><a href="./AdminServlet">Trang Dự Án</a></button>
-        <button id="btn4">Button 4</button>
-        <button id="btn5">Button 5</button>
+        
         <button id="btn6">
             <div class="logout-form">
                 <form:form action="${pageContext.request.contextPath}/logout" method="POST">
@@ -85,7 +84,7 @@
         <button id="btn3">Đóng Băng Tài Khoản</button>
         <button id="btn4">cập nhật Thông tin Tài Khoản </button>
         <button id="btn5">Loại tài khoản</button>
-       
+        <button id="btn6">Tìm tài khoản</button>
     </div>
 
     <div id="content1" class="content">
@@ -302,6 +301,15 @@
             
         </section>
     </div>
+    
+     <div id="content4" class="content">
+     
+     <form action="./searchServlet" method="GET">
+  <input type="text" name="keyword" placeholder="Nhập từ khóa">
+  <button type="submit">Tìm kiếm</button>
+</form>
+     
+     </div>
 </security:authorize>
  <script>
  // Lấy các phần tử button và content

@@ -90,6 +90,11 @@
             <button type="submit">Gửi quyên góp</button>
         </td>
         </c:if>
+         <c:if test="${authorList.authority eq 'ROLE_ADMIN'}">
+        <td colspan="9" style="text-align: center;">
+          <p>Admin </p>
+        </td>
+        </c:if>
     </tr>
 </form>
 
