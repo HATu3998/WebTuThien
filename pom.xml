@@ -6,19 +6,20 @@
   <packaging>war</packaging>
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>17</release>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.3</version>
-      </plugin>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <!-- Bỏ chọn tùy chọn release -->
+                <!-- <release>17</release> -->
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.2.3</version>
+        </plugin>
     </plugins>
-  </build>
+</build>
   
    <properties>
 		<springframework.version>5.0.2.RELEASE</springframework.version>
